@@ -1,0 +1,1015 @@
+<html>
+
+<head>
+  <script src="https://d3js.org/d3.v5.min.js"></script>
+  <style>
+    /* TODO: Add CSS styling elements here. */
+    body {
+      margin: 100 50;
+      font-family: "Arial", "Helvetica Neue", "Helvetica", sans-serif;
+      background-color: #fff5d7;
+      color: rgb(61, 61, 61);
+      stroke: rgb(61, 61, 61);
+      fill: rgb(61, 61, 61);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    h2 {
+      text-align: center;
+    }
+
+    h3 {
+      text-align: center;
+    }
+
+    #net-ids {
+      text-align: center;
+    }
+
+    #v1, #v2, #v3, #v4, #conclusion { 
+      margin: 0 100px;
+    }
+
+    #usa {
+      display: block;
+      margin: auto;
+    }
+
+    #maplegend { 
+      display: block; 
+      float: right;
+      margin-right: 100px;
+    }
+
+    #v1 { 
+      display: block;
+    }
+
+    #donutchartNV {
+      color: rgb(61, 61, 61);
+    }
+
+
+    #correlation-graph {
+      display: block;
+      margin: auto;
+    }
+
+    .axis-bottom text {
+      font-size: 14;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .axis-bottom path {
+      stroke: none;
+    }
+
+    .legend-text {
+      stroke: maroon;
+      fill: maroon;
+      color: maroon;
+    }
+
+    h2 .pie-chart-state {
+      stroke: rgb(61, 61, 61);
+      fill: rgb(61, 61, 61);
+    }
+  </style>
+</head>
+
+<body>
+  <h1>INFO 3300 Project1: Non-Interactive Data Visualizations</h1>
+  <p id="net-ids">Skylar Capasso (sjc339)<br>
+    Jennifer Lin (jl3263)<br>
+    Mariangel Rivera (mr857)<br>
+  </p>
+
+  <h2>Grid Map: Average Rating per State</h2>
+  <svg id="usa"></svg><br><br>
+  <svg id="maplegend"></svg><br><br>
+  <br><br><p id="v1"><b>Description:</b><br>
+    <br>The average star ratings for all restaurants in each state are represented on this gridmap. Star ratings range from 0 to 5, with lighter color hues representing low average star ratings and darker color hues representing high star ratings. Nevada, North Carolina, Wisconsin, Illinois, Pennsylvania, and Arizona are some of the states with high average ratings. And these are the sample of states we selected to study diversity of ethnic cuisine across the U.S. 
+  </p><br><br>
+
+  <h2 class='legend-text'>Legend:</h2>
+  <h3 class='legend-text'>
+    <br><text class='legend-text'>This legend can be used to depict the type of cuisine that each of the colors in our
+      following
+      three sections represent.
+      <br><br>The Average Correlation Score will only be used in the last visual.</text>
+  </h3>
+  <h2><svg id="legend"></svg></h2>
+
+  <h2>Scatter Plot: Average Ratings for Select Cuisines per State</h2>
+  <h2><svg id="scatterplot"></svg></h2>
+  <p id="v2"><b>Description</b><br>
+    <br>We arbitrarily chose common restaurant categories based on traditional kitchen styles from different countries
+    including as Mexican, American (Traditional), Chinese, Italian, Japanese, Indian.
+    We also picked out six states that we thought would be representative of different types of raters based on state
+    averages including NV, NC, WI, IL, PA, AZ.
+    Each point on the scatter plot depicts the average rating of the specified cuisine (seen in the legend),
+    for the specific state that it is in line with.
+    We think that a scatter plot is a good representation, as it makes it much easier to
+    compare how certain cuisines did in the various states.
+  </p>
+
+  <h2>Donut Chart: Percentage of Cuisines per State</h2>
+  <h2>
+    <svg id="donutchartNV"> <text x=30 y=30 class='pie-chart-state'>
+        Nevada:
+      </text></svg>
+    <svg id="donutchartNC"> <text x=30 y=30 class='pie-chart-state'>
+        North Carolina:
+      </text></svg>
+    <svg id="donutchartWI"> <text x=30 y=30 class='pie-chart-state'>
+        Wisconsin:
+      </text></svg>
+    <svg id="donutchartIL"> <text x=30 y=30 class='pie-chart-state'>
+        Illinois:
+      </text></svg>
+    <svg id="donutchartPA"> <text x=30 y=30 class='pie-chart-state'>
+        Pennsylvania:
+      </text></svg>
+    <svg id="donutchartAZ"> <text x=30 y=30 class='pie-chart-state'>
+        Arizona:
+      </text></svg>
+  </h2>
+  <p id="v3"><b>Description</b><br>
+    <br>Using the same list of states and cuisines, we want to show the number of cusines in each state
+    with respect to how many there are in total (for the selected kitchen categories).
+    We think multiple donut charts are a good representation of this because they make it easy to understand the
+    proportions of the different categories.
+    The goal is to find correlations between prefrences and number of businesses.
+    Therefore, the colors for the cuisines are constant throughout both of the aforementioned data visualizations.
+  </p>
+
+  <h2>Clustered Bar Graph: Correlation Between Rating and Quantity of Cuisines per State</h2>
+  <svg id="correlation-graph"></svg>
+  <p id="v4"><b>Description</b><br>
+    <br>Using a similarity measure, we made a clustered bar graph to show how related the ratings are to the quantity
+    of
+    different kitchen styles open in each state.
+    The correlation score for each cuisine is denoted by its color (which has been consistent thorughout) and the
+    average across all cuisines for each state is denoted in black.
+    This measure comes from getting the weighted distance between the ratings and quantity of restaurants.
+    The high scores show that cuisines with low ratings are scarse and those with higher ratings are many.
+    We think a bar graph is the simplest, most most efficient way to convey our message to the viewers because they are
+    good for comparing different categories (here we have 6 states) and following trends.
+  </p>
+  <br>
+  <p id="conclusion"><b>Summary</b><br>
+    <br>We started off looking at average ratings across all states for 6 cuisines we chose based on ethnic
+    representaitons.
+    We picked the states that had ample data points for the kitchen types we chose, and we used those in the three
+    graphs that followed.
+    First, we used a scatter plot to look at the average rating for each cuisine are in each state.
+    Then, we used pie charts to show the distribution of how many restaurants were in each state.
+    We calculated a correlation score across cuisines for each state to compare their ratings and quantity
+    values.
+    Finally, we used a clustered bar graph to represent these scores for each state along with their averages.
+  </p>
+
+  <script>
+    const DEBUG = true;
+
+    // #1 Load data
+    //gridmap data from https://github.com/kristw/gridmap-layout-usa 
+    //yelp data from https://www.yelp.com/dataset/documentation/main
+    Promise.all([d3.json("gridmap-layout-usa.json"), (d3.json("yelp_restaurants.json"))]).then((jsons) => {
+      var gridmap = jsons[0];
+      var data = jsons[1];
+      //––––––––––––––––––––––– DATA PROCESSING BEGINS –––––––––––––––––––––––––
+
+      // #2 Check for data issues and fix
+
+      // filter empty categories
+      data = data.filter((d) => { return d['categories'] != null; });
+      // turn each category string into a list
+      let mexican = [];
+      let american = [];
+      let chinese = [];
+      let japanese = [];
+      let italian = [];
+      let indian = [];
+
+      // data structure to get points by state and cuisine
+      let state_cuisine = {};
+
+      data.forEach((d, i) => {
+        if (d['categories'] != null) {
+          d['categories'] = d['categories'].split(", ");
+        }
+        // Separate businesses by cuisine
+        if (d['categories'].includes('Restaurants')) {
+          if (d['categories'].includes('Mexican')) {
+            mexican.push(d);
+          }
+          if (d['categories'].includes('American (Traditional)')) {
+            american.push(d);
+          }
+          if (d['categories'].includes('Chinese')) {
+            chinese.push(d);
+          }
+          if (d['categories'].includes('Japanese')) {
+            japanese.push(d);
+          }
+          if (d['categories'].includes('Italian')) {
+            italian.push(d);
+          }
+          if (d['categories'].includes('Indian')) {
+            indian.push(d);
+          }
+        }
+      });
+
+      // Useful variables for processing and iterating through data
+      var cuisines = [mexican, american, chinese, japanese, italian,
+        indian];
+      let cuisine_str = ['Mexican', 'American (Traditional)', 'Chinese',
+        'Japanese', 'Italian', 'Indian'];
+      let states = ["AK", "ME", "VT", "NH", "MA", "WA", "MT", "ND", "SD", "MN",
+        "WI", "MI", "NY", "CT", "RI", "OR", "ID", "WY", "NE", "IA",
+        "IL", "IN", "OH", "PA", "NJ", "CA", "NV", "UT", "CO", "KS",
+        "MO", "KY", "WV", "MD", "DE", "AZ", "NM", "OK", "AR", "TN",
+        "VA", "NC", "TX", "LA", "MS", "AL", "GA", "SC", "HI", "FL"];
+      let best_represented_states = ["NV", "WI", "IL", "NC", "AZ", "PA"];
+      let best_represented_states_index = {};
+      states.forEach((state, i) => {
+        if (best_represented_states.includes(state)) {
+          best_represented_states_index[state] = i;
+        }
+      });
+
+      states.forEach((state, i) => {
+        state_cuisine[state] = { 'Mexican': (mexican.filter((d) => { return d['state'] == state; })) };
+        state_cuisine[state]['American (Traditional)'] = american.filter((d) => { return d['state'] == state; });
+        state_cuisine[state]['Chinese'] = chinese.filter((d) => { return d['state'] == state; });
+        state_cuisine[state]['Japanese'] = japanese.filter((d) => { return d['state'] == state; });
+        state_cuisine[state]['Italian'] = italian.filter((d) => { return d['state'] == state; });
+        state_cuisine[state]['Indian'] = indian.filter((d) => { return d['state'] == state; });
+      });
+
+      // For scatter plot
+      var state_cuisine_average_rating = {};
+      function makeAverageRatingArray() {
+        // save percentages
+        let state_average_rating = [];
+
+        // for each state, iterate through all cuisines and save the number of total kitchens
+        states.forEach((state, i) => {
+          let rating_acc = 0;
+          let rating_count = 0;
+          // For scatter plot
+          if (best_represented_states.includes(state)) {
+            state_cuisine_average_rating[state] = {};
+          }
+          cuisine_str.forEach((cuisine, i) => {
+            // check that there is an array
+            cuisine_list = state_cuisine[state][cuisine];
+            if (cuisine_list) {
+              cuisine_list.forEach((d, k) => {
+                rating_acc += d['stars'];
+                rating_count += 1;
+              });
+            }
+            // For scatter plot
+            let state_cuisine_score = 0
+            if (rating_count != 0) {
+              state_cuisine_score = rating_acc / (rating_count);
+            }
+            if (best_represented_states.includes(state)) {
+              state_cuisine_average_rating[state][cuisine] = state_cuisine_score;
+              if (DEBUG) {
+                // console.log('State: ', state, '\nCuisine: ', cuisine, '\nAverage rating: ', state_cuisine_score);
+              }
+            }
+          });
+          let state_score = 0;
+          if (rating_count != 0) {
+            state_score = rating_acc / (rating_count);
+          }
+          state_average_rating.push(state_score);
+        });
+        return state_average_rating;
+
+      }
+
+      function makeTotalRestaurantsArray() {
+        // save percentages
+        let state_total_restaurants = [];
+
+        // for each state, iterate through all cuisines and save the number of total kitchens
+        states.forEach((state, i) => {
+          let restaurant_acc = 0;
+          cuisine_str.forEach((cuisine, i) => {
+            // check that there is an array
+            if (state_cuisine[state][cuisine]) {
+              restaurant_acc += state_cuisine[state][cuisine].length;
+            }
+          });
+          state_total_restaurants.push(restaurant_acc);
+        });
+        return state_total_restaurants;
+      }
+
+      var state_total_restaurants = makeTotalRestaurantsArray();
+      let state_average_rating = makeAverageRatingArray();
+
+      function correlationScore() {
+        // save state scores
+        let state_scores = []
+
+        // for each state calculate score
+        best_represented_states.forEach((state, i) => {
+          let state_score = 0;
+          let cuisine_acc = 0;
+          let cuisine_count = 0;
+          let state_idx = best_represented_states_index[state];
+          // for each cuisine calculate score and add it to accumulator
+          // the score will be the percent quantity minus the percent rating
+          // distance between quantity and rating
+          cuisine_str.forEach((cuisine, j) => {
+            let cuisine_score = 0;
+            let cuisine_rating_acc = 0;
+            let cuisine_rating_count = 0;
+            cuisine_list = state_cuisine[state][cuisine];
+
+            if (cuisine_list) {
+              cuisine_list.forEach((d, k) => {
+                cuisine_rating_acc += d['stars'];
+                cuisine_rating_count += 1
+              });
+            }
+            if (cuisine_rating_count != 0) {
+              let average_rating_percent = cuisine_rating_acc / (cuisine_rating_count * 5);
+              let quantity_percent = 0;
+              if (state_total_restaurants[state_idx] != 0) {
+                quantity_percent = cuisine_count / state_total_restaurants[state_idx];
+                cuisine_score = Math.abs(average_rating_percent - quantity_percent);
+              }
+              else {
+                if (DEBUG) { console.log('Problem 1: ', state, ' does not have any restaurants.') };
+              }
+
+            }
+            else {
+              if (DEBUG) { console.log('Problem 2: ', state, ' does not have any ', cuisine, ' kitchens.') };
+            }
+            if (cuisine_score != 0) {
+              cuisine_count += 1;
+              cuisine_acc += cuisine_score;
+            }
+            state_scores.push(cuisine_score)
+          });
+          // push calculated score
+          state_score = cuisine_acc / cuisine_count;
+          state_scores.push(state_score)
+
+        });
+        return state_scores;
+      }
+
+      let state_scores = correlationScore();
+      //––––––––––––––––––––––– DATA PROCESSING ENDS –––––––––––––––––––––––––––
+
+
+      //––––––––––––––––––––––––– JENNIFER STARTS ––––––––––––––––––––––––––––––
+      // #3 Make first data visualization: Map
+      // #3.1 Use d3.geoPath to convert data points in the yelp file and bin them into states.
+      // #3.2 Make an element per state and color it appropriately
+
+      //since DC was removed and MD and DE were next to DC, moved both one space back to left 
+      gridmap = gridmap.filter(d => {
+        if (d.key == "MD" || d.key == "DE") {
+          d.x = d.x - 1;
+        }
+        //no data for DC in Yelp so filtered out 
+        return d.key != "DC";
+      });
+
+      state_average_rating.forEach((d, i) => {
+        gridmap[i]["ratings"] = d;
+      })
+
+      var props = {
+        stateWidth: 80,
+        stateHeight: 80
+      };
+      
+      // Map color scale  
+      var color = d3.scaleQuantize()
+                    .domain([0,5])
+                    .range(['#bfdce8',  '#7cbad1',  '#599db5',   '#007e9e',  '#18323c']);
+      
+      var mapLegend = d3.select("svg#maplegend")
+                      .attr("width", 375)
+                      .attr("height", 80)
+                      .attr("x", 30)
+                      .attr("y", 30);
+
+      //Map legend
+      mapLegend.selectAll('rect')
+        .data(color.range())
+        .enter()
+        .append('rect')
+        .attr("width", 75)
+        .attr("height", 50)
+        .attr("x", (d,i) => {return i*75;})
+        .attr("y", 0)
+        .style('fill', d => {return d});
+        
+        var ratingRange = ["0 - 1", "1 - 2", "2 - 3", "3 - 4", "4 - 5"];
+        ratingRange.forEach((d,i)=> {
+          mapLegend.append("text")
+                .attr("x", i*75+40)
+                .attr("y", 70)
+                .attr("text-anchor","middle")
+                .text(d=> {return ratingRange[i];});
+      })
+      
+
+      let svg = d3.select('#usa')
+        .attr('width', 12 * props.stateWidth)
+        .attr('height', 8 * props.stateHeight);
+
+      var mapRegion = svg.append('g')
+        .selectAll('g')
+        .data(gridmap)
+        .enter().append('g')
+        .attr('transform', d => {
+          return 'translate(' + (d.x * props.stateWidth) + ',' + (d.y * props.stateHeight) + ')';
+        });
+
+      mapRegion.append('rect')
+        .attr('width', props.stateWidth)
+        .attr('height', props.stateHeight)
+        .style('opacity', 0.6)
+        .style('stroke', '#aaa')
+        .style('fill', d => { return color(d.ratings) });
+
+      //moved the abbreviation
+      mapRegion.append('text')
+        .attr('x', props.stateWidth / 2)
+        .attr('y', props.stateHeight / 2)
+        .style('text-anchor', 'middle')
+        .text(d => {
+          return d.key;
+        });
+
+      //––––––––––––––––––––––––– JENNIFER ENDS ––––––––––––––––––––––––––––––––
+
+
+      //––––––––––––––––––––––––– SKYLAR STARTS ––––––––––––––––––––––––––––––––
+
+      // #4 Make second data visualization: Bar graph
+      // #4.1 Make scales
+      // #4.2 Add gridlines
+      // #4.3 Add axes
+      // #4.4 Add data points
+
+      // #5 Make third data visualization: Donut chart
+      // #5.1 Add data points
+
+      const colorScale = d3.scaleOrdinal(["#f05618", "#1f8da6", "#666564", "#f7c41d", "#8c5e31", "#67a342"])
+      const colorScaleScatter = ["#f05618", "#1f8da6", "#666564", "#f7c41d", "#8c5e31", "#67a342"]
+      const colorScaleLegend = ["#f05618", "#1f8da6", "#666564", "#f7c41d", "#8c5e31", "#67a342", "black"]
+
+      const widthLegend = 450
+      const heightLegend = 490
+
+      const svgLegend = d3.select("svg#legend");
+      svgLegend.attr("width", widthLegend)
+        .attr("height", heightLegend)
+
+      svgLegend.append("rect")
+        .attr("x", 3)
+        .attr("y", 25)
+        .attr("width", 440)
+        .attr("height", 430)
+        .attr("stroke-width", "3")
+        .attr("stroke", "rgb(61, 61, 61);")
+        .attr("fill", "#fff5d7");
+
+
+
+      let legendArray = ['Mexican', 'American (Traditional)', 'Chinese',
+        'Japanese', 'Italian', 'Indian'];
+      legendArray.push('Average Correlation Score')
+      legendArray.forEach((d, i) => {
+        svgLegend.append("rect")
+          .attr("x", 60)
+          .attr("y", 78 + ((i % 7) * 50))
+          .attr("width", 30)
+          .attr("height", 30)
+          .attr("index", i)
+          .attr("fill", colorScaleLegend[i % (legendArray.length)]);
+        svgLegend.append("text")
+          .attr("class", "text")
+          .attr("x", 100)
+          .attr("y", 100 + ((i % 7) * 50))
+          .text(function (d) { return legendArray[i] })
+          .attr("index", i)
+      });
+
+
+      //–––––––––––––––––––––– SCATTER PLOT START ––––––––––––––––––––––––––––––
+
+      const widthScatter = 800
+      const heightScatter = 500
+
+      const svgScatter = d3.select("svg#scatterplot");
+      svgScatter.attr("width", widthScatter)
+        .attr("height", heightScatter)
+
+      mexicanNV = state_cuisine_average_rating['NV']['Mexican'];
+      americanNV = state_cuisine_average_rating['NV']['American (Traditional)'];
+      chineseNV = state_cuisine_average_rating['NV']['Chinese'];
+      italianNV = state_cuisine_average_rating['NV']['Italian'];
+      japaneseNV = state_cuisine_average_rating['NV']['Japanese'];
+      indianNV = state_cuisine_average_rating['NV']['Indian'];
+
+      mexicanNC = state_cuisine_average_rating['NC']['Mexican'];
+      americanNC = state_cuisine_average_rating['NC']['American (Traditional)'];
+      chineseNC = state_cuisine_average_rating['NC']['Chinese'];
+      italianNC = state_cuisine_average_rating['NC']['Italian'];
+      japaneseNC = state_cuisine_average_rating['NC']['Japanese'];
+      indianNC = state_cuisine_average_rating['NC']['Indian'];
+
+      mexicanWI = state_cuisine_average_rating['WI']['Mexican'];
+      americanWI = state_cuisine_average_rating['WI']['American (Traditional)'];
+      chineseWI = state_cuisine_average_rating['WI']['Chinese'];
+      italianWI = state_cuisine_average_rating['WI']['Italian'];
+      japaneseWI = state_cuisine_average_rating['WI']['Japanese'];
+      indianWI = state_cuisine_average_rating['WI']['Indian'];
+
+      mexicanIL = state_cuisine_average_rating['IL']['Mexican'];
+      americanIL = state_cuisine_average_rating['IL']['American (Traditional)'];
+      chineseIL = state_cuisine_average_rating['IL']['Chinese'];
+      italianIL = state_cuisine_average_rating['IL']['Italian'];
+      japaneseIL = state_cuisine_average_rating['IL']['Japanese'];
+      indianIL = state_cuisine_average_rating['IL']['Indian'];
+
+      mexicanPA = state_cuisine_average_rating['PA']['Mexican'];
+      americanPA = state_cuisine_average_rating['PA']['American (Traditional)'];
+      chinesePA = state_cuisine_average_rating['PA']['Chinese'];
+      italianPA = state_cuisine_average_rating['PA']['Italian'];
+      japanesePA = state_cuisine_average_rating['PA']['Japanese'];
+      indianPA = state_cuisine_average_rating['PA']['Indian'];
+
+      mexicanAZ = state_cuisine_average_rating['AZ']['Mexican'];
+      americanAZ = state_cuisine_average_rating['AZ']['American (Traditional)'];
+      chineseAZ = state_cuisine_average_rating['AZ']['Chinese'];
+      italianAZ = state_cuisine_average_rating['AZ']['Italian'];
+      japaneseAZ = state_cuisine_average_rating['AZ']['Japanese'];
+      indianAZ = state_cuisine_average_rating['AZ']['Indian'];
+
+      dataScatter = [{ 'x': 1, 'y': mexicanNV, z: "Mexican" }, { 'x': 1, 'y': americanNV, z: "American (Traditional)" },
+      { 'x': 1, 'y': chineseNV, z: "Chinese" }, { 'x': 1, 'y': italianNV, z: "Italian" },
+      { 'x': 1, 'y': japaneseNV, z: "Japanese" }, { 'x': 1, 'y': indianNV, z: "Indian" },
+
+      { 'x': 2, 'y': mexicanNC, z: "Mexican" }, { 'x': 2, 'y': americanNC, z: "American (Traditional" },
+      { 'x': 2, 'y': chineseNC, z: "Chinese" }, { 'x': 2, 'y': italianNC, z: "Italian" },
+      { 'x': 2, 'y': japaneseNC, z: "Mexican" }, { 'x': 2, 'y': indianNC, z: "Indian" },
+
+      { 'x': 3, 'y': mexicanWI, z: "Mexican" }, { 'x': 3, 'y': americanWI, z: "American (Traditional" },
+      { 'x': 3, 'y': chineseWI, z: "Chinese" }, { 'x': 3, 'y': italianWI, z: "Italian" },
+      { 'x': 3, 'y': japaneseWI, z: "Japanese" }, { 'x': 3, 'y': indianWI, z: "Indian" },
+
+      { 'x': 4, 'y': mexicanIL, z: "Mexican" }, { 'x': 4, 'y': americanIL, z: "American (Traditional" },
+      { 'x': 4, 'y': chineseIL, z: "Chinese" }, { 'x': 4, 'y': italianIL, z: "Italian" },
+      { 'x': 4, 'y': japaneseIL, z: "Japanese" }, { 'x': 4, 'y': indianIL, z: "Indian" },
+
+      { 'x': 5, 'y': mexicanPA, z: "Mexican" }, { 'x': 5, 'y': americanPA, z: "American (Traditional" },
+      { 'x': 5, 'y': chinesePA, z: "Chinese" }, { 'x': 5, 'y': italianPA, z: "Italian" },
+      { 'x': 5, 'y': japanesePA, z: "Japanese" }, { 'x': 5, 'y': indianPA, z: "Indian" },
+
+      { 'x': 6, 'y': mexicanAZ, z: "Mexican" }, { 'x': 6, 'y': americanAZ, z: "American (Traditional" },
+      { 'x': 6, 'y': chineseAZ, z: "Chinese" }, { 'x': 6, 'y': italianAZ, z: "Italian" },
+      { 'x': 6, 'y': japaneseAZ, z: "Japanese" }, { 'x': 6, 'y': indianAZ, z: "Indian" }];
+
+
+      const marginScatter = { 'top': 10, 'right': 70, 'bottom': 30, 'left': 40 };
+      const chartWidth = widthScatter - marginScatter.left - marginScatter.right;
+      const chartHeight = heightScatter - marginScatter.top - marginScatter.bottom;
+
+      let scatterPlot = svgScatter.append("g")
+        .attr("transform", "translate(" + marginScatter.left + "," + marginScatter.top + ")");
+
+
+      let xScale = d3.scaleLinear().domain([0, 5]).range([30, chartWidth - 30]);
+      let yScale = d3.scaleLinear().domain([3.25, 3.75]).range([chartHeight, 0]);
+
+      const leftTicks = 3;
+      const bottomTicks = 6; // 6 states
+
+      var formatStatesScatter = function (d) {
+        return best_represented_states[d];
+      }
+
+      let leftGridlinesScatter = d3.axisLeft(yScale)
+        .tickSize(-chartWidth)
+        .tickFormat('')
+        .ticks(leftTicks);
+      svgScatter.append('g')
+        .attr('class', 'gridlines')
+        .attr('transform', 'translate(' + marginScatter.left + ', ' + marginScatter.top + ')')
+        // .attr("stroke", '#9C9C9A')
+        .call(leftGridlinesScatter);
+
+      let leftAxisScatter = d3.axisLeft(yScale)
+        .ticks(leftTicks)
+        .tickFormat(d3.format('.2f'));
+      svgScatter.append('g')
+        .attr('class', 'axis axis-bottom')
+        .attr('transform', 'translate(' + marginScatter.left + ', ' + marginScatter.top + ')')
+        .call(leftAxisScatter);
+
+      let bottomAxisScatter = d3.axisBottom(xScale)
+        .ticks(bottomTicks)
+        .tickFormat(formatStatesScatter);
+      svgScatter.append('g')
+        .attr('class', 'axis axis-bottom')
+        .attr('transform', 'translate(' + marginScatter.left + ', ' + (chartHeight + marginScatter.top) + ')')
+        .call(bottomAxisScatter);
+
+      dataScatter.forEach((d, i) => {
+
+        circle = svgScatter.append("circle")
+          .attr("cx", xScale(d['x']) - 80)
+          .attr("cy", yScale(d['y']))
+          .attr("r", 9)
+          .attr("stroke", colorScaleScatter[i % (best_represented_states.length)])
+          .attr("stroke-width", 3)
+          .attr("stroke-opacity", .6)
+          .attr("fill-opacity", .4)
+          .attr("index", i)
+          .attr("fill", colorScaleScatter[i % (best_represented_states.length)]);
+
+
+
+
+      });
+
+
+
+      //–––––––––––––––––––––– SCATTER PLOT ENDS –––––––––––––––––––––––––––––––
+
+      //–––––––––––––––––––––– DONUT CHARTS START ––––––––––––––––––––––––––––––
+      //SVG Properties
+      const width = 300
+      const height = 300
+      const margin = 50
+
+      const radius = Math.min(width, height) / 2 - margin
+      const graphWidth = width / 2;
+      const graphHeight = height / 2;
+
+
+      //–––––––––––––––––––––– DONUT CHARTS NEVADA ––––––––––––––––––––––––––––––
+      const svgNV = d3.select("svg#donutchartNV");
+      svgNV.attr("width", width)
+        .attr("height", height)
+
+      let graphAreaNV = svgNV.append("g").attr("id", "points")
+        .attr("transform", "translate(" + graphWidth + "," + graphHeight + ")");
+
+      mexicanTotalNV = (state_cuisine['NV']['Mexican']).length;
+      americanTotalNV = state_cuisine['NV']['American (Traditional)'].length;
+      chineseTotalNV = state_cuisine['NV']['Chinese'].length;
+      japaneseTotalNV = state_cuisine['NV']['Japanese'].length;
+      italianTotalNV = state_cuisine['NV']['Italian'].length;
+      indianTotalNV = state_cuisine['NV']['Indian'].length;
+
+
+      const dataNV = {
+        first: mexicanTotalNV, second: americanTotalNV,
+        third: chineseTotalNV, fourth: japaneseTotalNV, fifth: italianTotalNV,
+        sixth: indianTotalNV
+      }
+
+      const pie = d3.pie()
+        .value(function (d) { return d.value })
+      const dataPieNV = pie(d3.entries(dataNV))
+
+      graphAreaNV
+        .selectAll('arc')
+        .data(dataPieNV)
+        .enter()
+        .append('path')
+        .attr('d', d3.arc()
+          .innerRadius(50)
+          .outerRadius(radius)
+        )
+        .attr('fill', function (d, i) {
+          return (colorScale(i))
+        })
+        .attr("stroke", "#fff5d7")
+        .style("stroke-width", "2px")
+        .style("opacity", 0.7)
+
+      //––––––––––––––––––– DONUT CHARTS NORTH CAROLINA ––––––––––––––––––––––––
+
+      const svgNC = d3.select("svg#donutchartNC");
+      svgNC.attr("width", width)
+        .attr("height", height)
+
+      let graphAreaNC = svgNC.append("g").attr("id", "points")
+        .attr("transform", "translate(" + graphWidth + "," + graphHeight + ")");
+
+      mexicanTotalNC = state_cuisine['NC']['Mexican'].length;
+      americanTotalNC = state_cuisine['NC']['American (Traditional)'].length;
+      chineseTotalNC = state_cuisine['NC']['Chinese'].length;
+      japaneseTotalNC = state_cuisine['NC']['Japanese'].length;
+      italianTotalNC = state_cuisine['NC']['Italian'].length;
+      indianTotalNC = state_cuisine['NC']['Indian'].length;
+
+      const dataNC = {
+        first: mexicanTotalNC, second: americanTotalNC,
+        third: chineseTotalNC, fourth: japaneseTotalNC, fifth: italianTotalNC,
+        sixth: indianTotalNC
+      }
+
+
+      const dataPieNC = pie(d3.entries(dataNC))
+
+      graphAreaNC
+        .selectAll('arc')
+        .data(dataPieNC)
+        .enter()
+        .append('path')
+        .attr('d', d3.arc()
+          .innerRadius(50)
+          .outerRadius(radius)
+        )
+        .attr('fill', function (d, i) {
+          return (colorScale(i))
+        })
+        .attr("stroke", "#fff5d7")
+        .style("stroke-width", "2px")
+        .style("opacity", 0.7)
+
+      //–––––––––––––––––––– DONUT CHARTS WISCONSIN ––––––––––––––––––––––––––––
+
+      const svgWI = d3.select("svg#donutchartWI");
+      svgWI.attr("width", width)
+        .attr("height", height)
+
+      let graphAreaWI = svgWI.append("g").attr("id", "points")
+        .attr("transform", "translate(" + graphWidth + "," + graphHeight + ")");
+
+      mexicanTotalWI = (state_cuisine['WI']['Mexican']).length;
+      americanTotalWI = state_cuisine['WI']['American (Traditional)'].length;
+      chineseTotalWI = state_cuisine['WI']['Chinese'].length;
+      japaneseTotalWI = state_cuisine['WI']['Japanese'].length;
+      italianTotalWI = state_cuisine['WI']['Italian'].length;
+      indianTotalWI = state_cuisine['WI']['Indian'].length;
+
+      const dataWI = {
+        first: mexicanTotalWI, second: americanTotalWI,
+        third: chineseTotalWI, fourth: japaneseTotalWI, fifth: italianTotalWI,
+        sixth: indianTotalWI
+      }
+
+
+      const dataPieWI = pie(d3.entries(dataWI))
+
+      graphAreaWI
+        .selectAll('arc')
+        .data(dataPieWI)
+        .enter()
+        .append('path')
+        .attr('d', d3.arc()
+          .innerRadius(50)
+          .outerRadius(radius)
+        )
+        .attr('fill', function (d, i) {
+          return (colorScale(i))
+        })
+        .attr("stroke", "#fff5d7")
+        .style("stroke-width", "2px")
+        .style("opacity", 0.7)
+
+      //–––––––––––––––––––––– DONUT CHARTS ILLIONOIS ––––––––––––––––––––––––––
+
+      const svgIL = d3.select("svg#donutchartIL");
+      svgIL.attr("width", width)
+        .attr("height", height)
+
+      let graphAreaIL = svgIL.append("g").attr("id", "points")
+        .attr("transform", "translate(" + graphWidth + "," + graphHeight + ")");
+
+      mexicanTotalIL = (state_cuisine['IL']['Mexican']).length;
+      americanTotalIL = state_cuisine['IL']['American (Traditional)'].length;
+      chineseTotalIL = state_cuisine['IL']['Chinese'].length;
+      japaneseTotalIL = state_cuisine['IL']['Japanese'].length;
+      italianTotalIL = state_cuisine['IL']['Italian'].length;
+      indianTotalIL = state_cuisine['IL']['Indian'].length;
+
+      const dataIL = {
+        first: mexicanTotalIL, second: americanTotalIL,
+        third: chineseTotalIL, fourth: japaneseTotalIL, fifth: italianTotalIL,
+        sixth: indianTotalIL
+      }
+
+
+      const dataPieIL = pie(d3.entries(dataIL))
+
+      graphAreaIL
+        .selectAll('arc')
+        .data(dataPieIL)
+        .enter()
+        .append('path')
+        .attr('d', d3.arc()
+          .innerRadius(50)
+          .outerRadius(radius)
+        )
+        .attr('fill', function (d, i) {
+          return (colorScale(i))
+        })
+        .attr("stroke", "#fff5d7")
+        .style("stroke-width", "2px")
+        .style("opacity", 0.7)
+
+      //–––––––––––––––––––––– DONUT CHARTS PENNSYLVANIA ––––––––––––––––––––––––
+
+      const svgPA = d3.select("svg#donutchartPA");
+      svgPA.attr("width", width)
+        .attr("height", height)
+
+      let graphAreaPA = svgPA.append("g").attr("id", "points")
+        .attr("transform", "translate(" + graphWidth + "," + graphHeight + ")");
+
+      mexicanTotalPA = (state_cuisine['PA']['Mexican']).length;
+      americanTotalPA = state_cuisine['PA']['American (Traditional)'].length;
+      chineseTotalPA = state_cuisine['PA']['Chinese'].length;
+      japaneseTotalPA = state_cuisine['PA']['Japanese'].length;
+      italianTotalPA = state_cuisine['PA']['Italian'].length;
+      indianTotalPA = state_cuisine['PA']['Indian'].length;
+
+      const dataPA = {
+        first: mexicanTotalPA, second: americanTotalPA,
+        third: chineseTotalPA, fourth: japaneseTotalPA, fifth: italianTotalPA,
+        sixth: indianTotalPA
+      }
+
+
+      const dataPiePA = pie(d3.entries(dataPA))
+
+      graphAreaPA
+        .selectAll('arc')
+        .data(dataPiePA)
+        .enter()
+        .append('path')
+        .attr('d', d3.arc()
+          .innerRadius(50)
+          .outerRadius(radius)
+        )
+        .attr('fill', function (d, i) {
+          return (colorScale(i))
+        })
+        .attr("stroke", "#fff5d7")
+        .style("stroke-width", "2px")
+        .style("opacity", 0.7)
+
+      //–––––––––––––––––––––– DONUT CHARTS ARIZONA ––––––––––––––––––––––––––––
+
+      const svgAZ = d3.select("svg#donutchartAZ");
+      svgAZ.attr("width", width)
+        .attr("height", height)
+
+      let graphAreaAZ = svgAZ.append("g").attr("id", "points")
+        .attr("transform", "translate(" + graphWidth + "," + graphHeight + ")");
+
+      mexicanTotalAZ = (state_cuisine['AZ']['Mexican']).length;
+      americanTotalAZ = state_cuisine['AZ']['American (Traditional)'].length;
+      chineseTotalAZ = state_cuisine['AZ']['Chinese'].length;
+      japaneseTotalAZ = state_cuisine['AZ']['Japanese'].length;
+      italianTotalAZ = state_cuisine['AZ']['Italian'].length;
+      indianTotalAZ = state_cuisine['AZ']['Indian'].length;
+
+      const dataAZ = {
+        first: mexicanTotalAZ, second: americanTotalAZ,
+        third: chineseTotalAZ, fourth: japaneseTotalAZ, fifth: italianTotalAZ,
+        sixth: indianTotalAZ
+      }
+
+
+      const dataPieAZ = pie(d3.entries(dataAZ))
+
+      graphAreaAZ
+        .selectAll('arc')
+        .data(dataPieAZ)
+        .enter()
+        .append('path')
+        .attr('d', d3.arc()
+          .innerRadius(50)
+          .outerRadius(radius)
+        )
+        .attr('fill', function (d, i) {
+          return (colorScale(i))
+        })
+        .attr("stroke", "#fff5d7")
+        .style("stroke-width", "2px")
+        .style("opacity", 0.7)
+
+      //–––––––––––––––––––––– DONUT CHARTS END ––––––––––––––––––––––––––––––––
+
+      //––––––––––––––––––––––––– SKYLAR ENDS ––––––––––––––––––––––––––––––––
+
+      //––––––––––––––––––––––––––– MARI STARTS ––––––––––––––––––––––––––––––––
+      // #6 Make bar graph
+      const width_cbg = 600;
+      const height_cbg = 500;
+      const margins_cbg = { 'top': 10, 'right': 10, 'bottom': 30, 'left': 40 };
+      const chartWidth_cbg = width_cbg - margins_cbg.left - margins_cbg.right;
+      const chartHeight_cbg = height_cbg - margins_cbg.top - margins_cbg.bottom;
+      const barWidth_cbg = 4.6;
+      let svg_cbg = d3.select('#correlation-graph')
+        .attr('width', width_cbg)
+        .attr('height', height_cbg);
+
+      // #6.1 Make Scales
+      d3.piecewise = function (d) {
+        // margins
+        let padding = { 'boxLeft': 20, 'boxRight': 20, 'barLeft': 2, 'barRight': 2 };
+        // cuisines + average
+        let boxWidth = chartWidth_cbg / best_represented_states.length;
+        let barWidth = ((boxWidth - (padding['boxLeft'] + padding['boxRight'])) / cuisine_str.length) - (padding['barLeft'] + padding['barRight']);
+        // Keep track of where the data point goes
+        let boxIdx = Math.floor(d / (cuisine_str.length + 1));
+        let boxElementIdx = d % (cuisine_str.length + 1);
+        // Calculate space before to get position
+        let spaceFromBinStart = boxWidth * boxIdx + padding['boxLeft'];
+        let spaceFromPrevBars = ((padding['barRight'] + barWidth) * boxElementIdx)
+          + (padding['barLeft'] * (boxElementIdx + 1));
+        if (DEBUG) {
+          console.log('–––– piecewise function values ––––');
+          console.log('d = ', d);
+          console.log('barWidth = ', barWidth);
+        }
+        return spaceFromBinStart + spaceFromPrevBars;
+      };
+      let stateScale_cbg = d3.piecewise;
+      let stateAxisScale_cbg = d3.scaleLinear().domain([0, best_represented_states.length]).range([0, chartWidth_cbg]);
+      let scoreScale_cbg = d3.scaleLinear().domain([0, 1]).range([chartHeight_cbg, 0]);
+      let colorScaleWithBlack = ["#f05618", "#1f8da6", "#666564", "#f7c41d", "#8c5e31", "#67a342", 'black'];
+      let barOpacity = [.5, .5, .5, .5, .5, .5, 1];
+
+      // #6.2 Add gridlines (xScale: 50 states, yScale: correlationScore)
+      const numLeftTicks_cbg = 10;
+      const numBottomTicks_cbg = best_represented_states.length;
+      let leftGridlines = d3.axisLeft(scoreScale_cbg)
+        .tickSize(-chartWidth_cbg)
+        .tickFormat('')
+        .ticks(numLeftTicks_cbg);
+      svg_cbg.append('g')
+        .attr('class', 'gridlines')
+        .attr('transform', 'translate(' + margins_cbg.left + ', ' + margins_cbg.top + ')')
+        .call(leftGridlines);
+
+      // #6.3 Add axes (xScale: priceScale, yScale: pointsScale)
+      var formatStates = function (d) {
+        if (DEBUG) console.log(best_represented_states, ', ', d);
+        return best_represented_states[d];
+      }
+      let leftAxis_cbg = d3.axisLeft(scoreScale_cbg).ticks(numLeftTicks_cbg).tickFormat(d3.format('.2f'));
+      svg_cbg.append('g')
+        .attr('class', 'axis')
+        .attr('transform', 'translate(' + margins_cbg.left + ', ' + margins_cbg.top + ')')
+        .call(leftAxis_cbg);
+      let bottomAxis_cbg = d3.axisBottom(stateAxisScale_cbg)
+        .ticks(numBottomTicks_cbg)
+        .tickSize(0)
+        .tickFormat(formatStates);
+      svg_cbg.append('g')
+        .attr('class', 'axis axis-bottom')
+        // Moving so that states are in the middle of the bar clusters
+        .attr('transform', 'translate(' + (margins_cbg.left + 50) + ',' + (chartHeight_cbg + margins_cbg.top + 10) + ')')
+        .call(bottomAxis_cbg);
+
+      // #6.4 Add bars
+      let bar_cbg = svg_cbg.append('g').attr('transform', 'translate(' + margins_cbg.left + ',' + margins_cbg.top + ')');
+      state_scores.forEach((score, i) => {
+        if (score > 0) {
+          bar_cbg.append("rect")
+            .attr('x', stateScale_cbg(i) - barWidth_cbg / 2)
+            .attr('y', scoreScale_cbg(score))
+            .attr('width', barWidth_cbg)
+            .attr('height', chartHeight_cbg - scoreScale_cbg(score))
+            .attr('opacity', barOpacity[i % (best_represented_states.length + 1)])
+            .attr('fill', colorScaleWithBlack[i % (best_represented_states.length + 1)]);
+        }
+      });
+      //––––––––––––––––––––––––––– MARI ENDS ––––––––––––––––––––––––––––––––––
+
+    }); error => {
+      console.log(error);
+    };
+  </script>
+
+</body>
+
+</html>
